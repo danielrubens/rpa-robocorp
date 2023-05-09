@@ -13,6 +13,8 @@ def main():
     time.sleep(3)
     bot.click_filter_section()
     time.sleep(3)
+    bot.click_filter_date()
+    time.sleep(2)
 
 if __name__ == '__main__':
     main()

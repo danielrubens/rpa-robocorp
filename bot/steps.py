@@ -25,4 +25,9 @@ class Bot:
     def click_filter_section(self):
         button_section = self.find('css:button[data-testid="search-multiselect-button"]')
         button_section.click()
+
+    def click_filter_date(self):
+        button_type = self.find('css:button[data-testid="search-date-dropdown-a"]')
+        print(button_type)
+        button_type.click()
         

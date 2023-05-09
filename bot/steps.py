@@ -4,6 +4,7 @@ class Bot:
     def __init__(self, url):
         self.url = url
         self.navigator = Selenium()
+        self.find = self.navigator.find_element
 
     def land_page(self):
         self.navigator.open_available_browser(self.url)
@@ -12,13 +13,10 @@ class Bot:
         self.navigator.maximize_browser_window()
 
     def click_cookies(self):
-        accept = self.navigator.find_element('xpath://button[@data-testid="GDPR-accept"]')
-        accept.click()
+        self.find('xpath://button[@data-testid="GDPR-accept"]').click()
 
     def click_search(self):
-        search = self.navigator.find_element('css:button[data-test-id="search-button"]')
-        search.click()
+        self.find('css:button[data-test-id="search-button"]').click()
 
     def search_field(self):
-        text_area = self.navigator.find_element('css:input[data-testid="search-input"]')
-        text_area.send_keys("Biden")
+        self.find('css:input[data-testid="search-input"]').send_keys("Biden")

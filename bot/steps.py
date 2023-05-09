@@ -20,3 +20,9 @@ class Bot:
 
     def search_field(self):
         self.find('css:input[data-testid="search-input"]').send_keys("Biden")
+        self.find('css:button[data-test-id="search-submit"]').click()
+
+    def click_filter_section(self):
+        button_section = self.find('css:button[data-testid="search-multiselect-button"]')
+        button_section.click()
+        

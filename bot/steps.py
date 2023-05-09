@@ -22,12 +22,14 @@ class Bot:
         self.find('css:input[data-testid="search-input"]').send_keys("Biden")
         self.find('css:button[data-test-id="search-submit"]').click()
 
-    def click_filter_section(self):
-        button_section = self.find('css:button[data-testid="search-multiselect-button"]')
-        button_section.click()
-
     def click_filter_date(self):
-        button_type = self.find('css:button[data-testid="search-date-dropdown-a"]')
-        print(button_type)
-        button_type.click()
+        button_date = self.find('css:button[data-testid="search-date-dropdown-a"]')
+        button_date.click()
+
+    def click_filter_section(self):
+        button_section = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[0]
+        button_section.click()
         
+    def click_filter_type(self):
+        button_type = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[1]
+        button_type.click()

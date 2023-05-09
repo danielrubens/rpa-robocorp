@@ -10,3 +10,7 @@ class Bot:
 
     def maximize_window(self):
         self.navigator.maximize_browser_window()
+
+    def click_cookies(self):
+        accept = self.navigator.find_element('xpath://button[@data-testid="GDPR-accept"]')
+        accept.click()

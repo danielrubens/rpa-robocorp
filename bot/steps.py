@@ -18,3 +18,7 @@ class Bot:
     def click_search(self):
         search = self.navigator.find_element('css:button[data-test-id="search-button"]')
         search.click()
+
+    def search_field(self):
+        text_area = self.navigator.find_element('css:input[data-testid="search-input"]')
+        text_area.send_keys("Biden")

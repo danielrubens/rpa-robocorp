@@ -9,6 +9,8 @@ def main():
     time.sleep(2)
     bot.click_search()
     time.sleep(2)
+    bot.search_field()
+    time.sleep(2)
 
 if __name__ == '__main__':
     main()

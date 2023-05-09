@@ -14,3 +14,7 @@ class Bot:
     def click_cookies(self):
         accept = self.navigator.find_element('xpath://button[@data-testid="GDPR-accept"]')
         accept.click()
+
+    def click_search(self):
+        search = self.navigator.find_element('css:button[data-test-id="search-button"]')
+        search.click()

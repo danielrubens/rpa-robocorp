@@ -1,3 +1,4 @@
+import time
 from bot.services import clean, select_params
 from RPA.Browser.Selenium import Selenium
 from datetime import datetime, timedelta
@@ -54,5 +55,9 @@ class Bot:
         start_date_field = self.find('css:[aria-label="start date"]')
         start_date_field.clear()
         start_date_field.send_keys(start_date)
+        end_date_field = self.find('css:[aria-label="end date"]')
+        end_date_field.clear()
+        end_date_field.send_keys(end_date)
+        time.sleep(3)
 
 

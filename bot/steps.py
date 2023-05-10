@@ -1,5 +1,6 @@
 from bot.services import clean, select_params
 from RPA.Browser.Selenium import Selenium
+from datetime import datetime, timedelta
 
 class Bot:
     def __init__(self, url):
@@ -23,9 +24,9 @@ class Bot:
         self.find('css:input[data-testid="search-input"]').send_keys("Biden")
         self.find('css:button[data-test-id="search-submit"]').click()
 
-    def click_filter_date(self):
-        button_date = self.find('css:button[data-testid="search-date-dropdown-a"]')
-        button_date.click()
+    # def click_filter_date(self):
+    #     button_date = self.find('css:button[data-testid="search-date-dropdown-a"]')
+    #     button_date.click()
 
     def click_filter(self, params, filter):
         index = {"section": 0, "type": 1}[filter]
@@ -40,3 +41,15 @@ class Bot:
     
     def click_filter_type(self, params):
         self.click_filter(params, "type")
+
+    def select_date(self, months):
+        if months == 0:
+            months = 1
+        start_date = (datetime.now() - timedelta(days=30 * months - 1)).strftime("%m/%d/%Y")
+        end_date = datetime.now().strftime("%m/%d/%Y")
+        button_date = self.find('class:css-p5555t')
+        button_date.click()
+        button_specify_date = self.navigator.find_element('css:[aria-label="Specific Dates"]')
+        button_specify_date.click()
+
+

@@ -11,13 +11,12 @@ def main():
     time.sleep(2)
     bot.search_field()
     time.sleep(3)
-    bot.click_filter_date()
-    time.sleep(3)
     bot.click_filter_section(['Blogs', 'Business'])
     time.sleep(2)
     bot.click_filter_type(['Article'])
     time.sleep(2)
-
+    bot.select_date(2)
+    time.sleep(2)
 
 if __name__ == '__main__':
     main()

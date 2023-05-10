@@ -59,11 +59,5 @@ class Bot:
         return len(text.split())
     
     def get_results(self):
-        results = self.navigator.find_elements('css:[data-testid="search-bodega-result"]')[0]
-        figure = self.find("xpath=//img").get_attribute("src")
- 
-        my_dict = generate_fields(results, figure)
-
-        print(my_dict)
-
-
+        results = self.navigator.find_elements('xpath://li[@data-testid="search-bodega-result"]')
+        return [generate_fields(i) for i in results]

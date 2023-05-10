@@ -21,10 +21,18 @@ def get_dates(months):
 def word_count(text):
         return len(text.split())
 
-def generate_fields(result, figure):
-    text = result.text.split('\n')
-    figurename = figure.split('/')[-1]
-    quantity = word_count(text[3]) + word_count(text[2])
-    my_dict = {"title": text[2], "date": text[-1], "description": text[3], "words": quantity,
-                "image_src": figure, "image_name": figurename}
+def has_money(text):
+    pattern = r'(\$[\d,]+(\.\d+)?|\d+(\.\d+)?\s*(dollars|USD))'
+    return re.search(pattern, text) is not None
+
+def generate_fields(i):
+    title = i.find_element(by='xpath', value='.//h4[@class="css-2fgx4k"]').text
+    date = i.find_element(by='xpath', value='.//span[@data-testid="todays-date"]').text
+    description = i.find_element(by='xpath', value= './/p[@class="css-16nhkrn"]').text
+    image_url = i.find_element(by='xpath', value='.//img').get_attribute('src')
+    image_name = image_url.split('/')[-1].split('?')[0]
+    my_dict = { "title": title, "date": date, "description": description,
+                "image_url": image_url, "image_name": image_name,
+                "qty_words": word_count(title) + word_count(description),
+                "has_money": has_money(description) or has_money(title)}
     return my_dict

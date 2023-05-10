@@ -1,7 +1,8 @@
 import time
-from bot.services import clean, select_params
+from bot.services import clean, select_params, get_dates
 from RPA.Browser.Selenium import Selenium
-from datetime import datetime, timedelta
+from selenium.webdriver.common.keys import Keys
+
 
 class Bot:
     def __init__(self, url):
@@ -25,10 +26,6 @@ class Bot:
         self.find('css:input[data-testid="search-input"]').send_keys("Biden")
         self.find('css:button[data-test-id="search-submit"]').click()
 
-    # def click_filter_date(self):
-    #     button_date = self.find('css:button[data-testid="search-date-dropdown-a"]')
-    #     button_date.click()
-
     def click_filter(self, params, filter):
         index = {"section": 0, "type": 1}[filter]
         button = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[index]
@@ -44,10 +41,7 @@ class Bot:
         self.click_filter(params, "type")
 
     def select_date(self, months):
-        if months == 0:
-            months = 1
-        start_date = (datetime.now() - timedelta(days=30 * months - 1)).strftime("%m/%d/%Y")
-        end_date = datetime.now().strftime("%m/%d/%Y")
+        start_date, end_date = get_dates(months)
         button_date = self.find('class:css-p5555t')
         button_date.click()
         button_specify_date = self.find('css:[aria-label="Specific Dates"]')
@@ -58,6 +52,5 @@ class Bot:
         end_date_field = self.find('css:[aria-label="end date"]')
         end_date_field.clear()
         end_date_field.send_keys(end_date)
-        time.sleep(3)
-
-
+        end_date_field.send_keys(Keys.ENTER)
+        time.sleep(2)

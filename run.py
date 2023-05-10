@@ -1,4 +1,5 @@
 from bot.steps import Bot
+from bot.writer import Writer
 import time
 
 def main():
@@ -17,7 +18,10 @@ def main():
     time.sleep(2)
     bot.select_date(2)
     time.sleep(2)
-    bot.get_results()
+    news = bot.get_results()
+    writer = Writer(news)
+    writer.load_xml()
+    writer.save_images()
 
 if __name__ == '__main__':
     main()

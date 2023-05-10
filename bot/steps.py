@@ -1,4 +1,3 @@
-import re
 from bot.services import clean, select_params
 from RPA.Browser.Selenium import Selenium
 
@@ -28,17 +27,16 @@ class Bot:
         button_date = self.find('css:button[data-testid="search-date-dropdown-a"]')
         button_date.click()
 
+    def click_filter(self, params, filter):
+        index = {"section": 0, "type": 1}[filter]
+        button = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[index]
+        button.click()
+        elements = self.navigator.find_elements('class:css-1qtb2wd')
+        treated = clean(elements)
+        select_params(params, treated, elements)
+    
     def click_filter_section(self, params):
-        button_section = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[0]
-        button_section.click()
-        elements = self.navigator.find_elements('class:css-1qtb2wd')
-        treated = clean(elements)
-        select_params(params, treated, elements)
-        
+        self.click_filter(params, "section")
+    
     def click_filter_type(self, params):
-        button_type = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[1]
-        button_type.click()
-        elements = self.navigator.find_elements('class:css-1qtb2wd')
-        treated = clean(elements)
-        # print(treated)
-        select_params(params, treated, elements)
+        self.click_filter(params, "type")

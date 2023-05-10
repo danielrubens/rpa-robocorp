@@ -17,6 +17,8 @@ def main():
     time.sleep(2)
     bot.click_filter_type()
     time.sleep(2)
+    bot.get_filter_section()
+    time.sleep(2)
 
 if __name__ == '__main__':
     main()

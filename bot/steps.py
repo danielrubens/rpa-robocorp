@@ -1,3 +1,4 @@
+from bot.services import clean
 from RPA.Browser.Selenium import Selenium
 
 class Bot:
@@ -33,3 +34,8 @@ class Bot:
     def click_filter_type(self):
         button_type = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[1]
         button_type.click()
+
+    def get_filter_section(self):
+        elements = self.navigator.find_elements('class:css-64f9ga')
+        filters = clean(elements)
+        print(filters)

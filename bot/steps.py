@@ -1,5 +1,5 @@
 import re
-from bot.services import clean
+from bot.services import clean, select_params
 from RPA.Browser.Selenium import Selenium
 
 class Bot:
@@ -38,9 +38,5 @@ class Bot:
 
     def get_filter_section(self, params):
         elements = self.navigator.find_elements('class:css-1qtb2wd')
-        test = [i.text for i in elements]
-        treated = [re.sub(r'\d+', '', element).strip(',') for element in test]
-        for i in params:
-            for j in range(len(treated) -1):
-                if treated[j] == i:
-                    elements[j].click()
+        treated = clean(elements)
+        select_params(params, treated, elements)

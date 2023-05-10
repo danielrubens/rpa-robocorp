@@ -61,8 +61,12 @@ class Bot:
     def get_results(self):
         results = self.navigator.find_elements('css:[data-testid="search-bodega-result"]')[0]
         test = results.text.split('\n')
+        figure = self.find("xpath=//img").get_attribute("src")
+        figurename = figure.split('/')[-1]
+ 
         quantity = self.word_count(test[3]) + self.word_count(test[2])
-        my_dict = {"title": test[2], "date": test[-1], "description": test[3], "words": quantity}
+        my_dict = {"title": test[2], "date": test[-1], "description": test[3], "words": quantity,
+                   "image_src": figure, "image_name": figurename}
 
         print(my_dict)
 

@@ -1,3 +1,4 @@
+import re
 from bot.services import clean
 from RPA.Browser.Selenium import Selenium
 
@@ -36,6 +37,7 @@ class Bot:
         button_type.click()
 
     def get_filter_section(self):
-        elements = self.navigator.find_elements('class:css-64f9ga')
-        filters = clean(elements)
-        print(filters)
+        elements = self.navigator.find_elements('class:css-1qtb2wd')
+        test = [i.text for i in elements]
+        treated = [re.sub(r'\d+', '', element).strip(',') for element in test]
+        print(treated)

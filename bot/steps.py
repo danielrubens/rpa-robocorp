@@ -49,7 +49,10 @@ class Bot:
         end_date = datetime.now().strftime("%m/%d/%Y")
         button_date = self.find('class:css-p5555t')
         button_date.click()
-        button_specify_date = self.navigator.find_element('css:[aria-label="Specific Dates"]')
+        button_specify_date = self.find('css:[aria-label="Specific Dates"]')
         button_specify_date.click()
+        start_date_field = self.find('css:[aria-label="start date"]')
+        start_date_field.clear()
+        start_date_field.send_keys(start_date)
 
 

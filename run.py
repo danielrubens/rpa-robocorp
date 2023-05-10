@@ -1,23 +1,31 @@
+import time
 from bot.steps import Bot
 from bot.writer import Writer
-import time
+from functools import wraps
 
+
+def handle_exceptions_and_delay(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        time.sleep(2)
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(f"An error occurred in function '{func.__name__}': {str(e)}")
+    return wrapper
+
+
+@handle_exceptions_and_delay
 def main():
     bot = Bot('https://www.nytimes.com/')
     bot.land_page()
     bot.maximize_window()
     bot.click_cookies()
-    time.sleep(2)
     bot.click_search()
-    time.sleep(2)
     bot.search_field()
-    time.sleep(3)
     bot.click_filter_section(['Blogs', 'Business'])
-    time.sleep(2)
     bot.click_filter_type(['Article'])
-    time.sleep(2)
     bot.select_date(2)
-    time.sleep(2)
     news = bot.get_results()
     writer = Writer(news)
     writer.load_xml()

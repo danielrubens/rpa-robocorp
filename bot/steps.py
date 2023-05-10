@@ -55,7 +55,6 @@ class Bot:
         end_date_field.clear()
         end_date_field.send_keys(end_date)
         end_date_field.send_keys(Keys.ENTER)
-        time.sleep(2)
     
     def get_results(self):
         results = self.find_elements(Selector.BODEGA_RESULTS)

@@ -17,7 +17,7 @@ def main():
     time.sleep(2)
     bot.click_filter_type()
     time.sleep(2)
-    bot.get_filter_section()
+    bot.get_filter_section(['Video','Audio'])
     time.sleep(2)
 
 if __name__ == '__main__':

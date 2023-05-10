@@ -54,3 +54,16 @@ class Bot:
         end_date_field.send_keys(end_date)
         end_date_field.send_keys(Keys.ENTER)
         time.sleep(2)
+
+    def word_count(self, text):
+        return len(text.split())
+    
+    def get_results(self):
+        results = self.navigator.find_elements('css:[data-testid="search-bodega-result"]')[0]
+        test = results.text.split('\n')
+        quantity = self.word_count(test[3]) + self.word_count(test[2])
+        my_dict = {"title": test[2], "date": test[-1], "description": test[3], "words": quantity}
+
+        print(my_dict)
+
+

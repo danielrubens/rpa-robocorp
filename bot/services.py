@@ -13,7 +13,7 @@ def select_params(params, treated, elements):
 
 def get_dates(months):
     if months == 0:
-            months = 1
+        months = 1
     start_date = (datetime.now() - timedelta(days=30 * months - 1)).strftime("%m/%d/%Y")
     end_date = datetime.now().strftime("%m/%d/%Y")
     return (start_date, end_date)

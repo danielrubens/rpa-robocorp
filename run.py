@@ -17,6 +17,7 @@ def main():
     time.sleep(2)
     bot.select_date(2)
     time.sleep(2)
+    bot.get_results()
 
 if __name__ == '__main__':
     main()

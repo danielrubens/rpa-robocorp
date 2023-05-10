@@ -1,5 +1,6 @@
 import re
 from datetime import datetime, timedelta
+from bot.constants import Selector
 
 def clean(elements):
     texts = [i.text for i in elements]
@@ -26,10 +27,10 @@ def has_money(text):
     return re.search(pattern, text) is not None
 
 def generate_fields(i):
-    title = i.find_element(by='xpath', value='.//h4[@class="css-2fgx4k"]').text
-    date = i.find_element(by='xpath', value='.//span[@data-testid="todays-date"]').text
-    description = i.find_element(by='xpath', value= './/p[@class="css-16nhkrn"]').text
-    image_url = i.find_element(by='xpath', value='.//img').get_attribute('src')
+    title = i.find_element(by='xpath', value=Selector.TITLE).text
+    date = i.find_element(by='xpath', value=Selector.DATE).text
+    description = i.find_element(by='xpath', value=Selector.DESCRIPTION).text
+    image_url = i.find_element(by='xpath', value=Selector.IMAGE).get_attribute('src')
     image_name = image_url.split('/')[-1].split('?')[0]
     my_dict = { "title": title, "date": date, "description": description,
                 "image_url": image_url, "image_name": image_name,

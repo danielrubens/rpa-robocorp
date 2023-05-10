@@ -1,7 +1,8 @@
 import time
-from bot.services import clean, select_params, get_dates, generate_fields
+from bot.constants import Selector
 from RPA.Browser.Selenium import Selenium
 from selenium.webdriver.common.keys import Keys
+from bot.services import clean, select_params, get_dates, generate_fields
 
 
 class Bot:
@@ -9,6 +10,7 @@ class Bot:
         self.url = url
         self.navigator = Selenium()
         self.find = self.navigator.find_element
+        self.find_elements = self.navigator.find_elements
 
     def land_page(self):
         self.navigator.open_available_browser(self.url)
@@ -17,20 +19,20 @@ class Bot:
         self.navigator.maximize_browser_window()
 
     def click_cookies(self):
-        self.find('xpath://button[@data-testid="GDPR-accept"]').click()
+        self.find(Selector.COOKIES).click()
 
     def click_search(self):
-        self.find('css:button[data-test-id="search-button"]').click()
+        self.find(Selector.SEARCH).click()
 
     def search_field(self):
-        self.find('css:input[data-testid="search-input"]').send_keys("Biden")
-        self.find('css:button[data-test-id="search-submit"]').click()
+        self.find(Selector.SEARCH_INPUT).send_keys("Biden")
+        self.find(Selector.SEARCH_SUBMIT).click()
 
     def click_filter(self, params, filter):
         index = {"section": 0, "type": 1}[filter]
-        button = self.navigator.find_elements('css:button[data-testid="search-multiselect-button"]')[index]
+        button = self.find_elements(Selector.MULTISELECT_BUTTON)[index]
         button.click()
-        elements = self.navigator.find_elements('class:css-1qtb2wd')
+        elements = self.find_elements(Selector.MULTISELECT_ELEMENTS)
         treated = clean(elements)
         select_params(params, treated, elements)
     
@@ -42,22 +44,19 @@ class Bot:
 
     def select_date(self, months):
         start_date, end_date = get_dates(months)
-        button_date = self.find('class:css-p5555t')
+        button_date = self.find(Selector.DATE_BUTTON)
         button_date.click()
-        button_specify_date = self.find('css:[aria-label="Specific Dates"]')
+        button_specify_date = self.find(Selector.SPECIFY_DATE_BUTTON)
         button_specify_date.click()
-        start_date_field = self.find('css:[aria-label="start date"]')
+        start_date_field = self.find(Selector.START_DATE_FIELD)
         start_date_field.clear()
         start_date_field.send_keys(start_date)
-        end_date_field = self.find('css:[aria-label="end date"]')
+        end_date_field = self.find(Selector.END_DATE_FIELD)
         end_date_field.clear()
         end_date_field.send_keys(end_date)
         end_date_field.send_keys(Keys.ENTER)
         time.sleep(2)
-
-    def word_count(self, text):
-        return len(text.split())
     
     def get_results(self):
-        results = self.navigator.find_elements('xpath://li[@data-testid="search-bodega-result"]')
+        results = self.find_elements(Selector.BODEGA_RESULTS)
         return [generate_fields(i) for i in results]

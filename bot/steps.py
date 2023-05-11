@@ -1,4 +1,3 @@
-import time
 from bot.constants import Selector
 from RPA.Browser.Selenium import Selenium
 from selenium.webdriver.common.keys import Keys

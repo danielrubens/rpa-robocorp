@@ -41,4 +41,3 @@ class Writer:
                 spreadsheet.write(index + 1, col_index, value)
 
         workbook.close()
-

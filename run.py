@@ -2,7 +2,7 @@ import time
 from bot.steps import Bot
 from bot.writer import Writer
 from functools import wraps
-
+from initial_values import Constants
 
 def handle_exceptions_and_delay(func):
     @wraps(func)
@@ -17,14 +17,17 @@ def handle_exceptions_and_delay(func):
 
 @handle_exceptions_and_delay
 def main():
-    bot = Bot('https://www.nytimes.com/')
+    bot = Bot(Constants.URL)
     bot.land_page()
     bot.maximize_window()
     bot.click_cookies()
     bot.click_search()
-    bot.search_field()
-    bot.click_filter_section(['Blogs', 'Business'])
-    bot.click_filter_type(['Article'])
+    time.sleep(2)
+    bot.search_field(Constants.SEARCH)
+    time.sleep(2)
+    bot.click_filter_section(Constants.SECTION)
+    time.sleep(2)
+    bot.click_filter_type(Constants.TYPE)
     bot.select_date(2)
     news = bot.get_results()
     writer = Writer(news)

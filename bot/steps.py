@@ -24,8 +24,8 @@ class Bot:
     def click_search(self):
         self.find(Selector.SEARCH).click()
 
-    def search_field(self):
-        self.find(Selector.SEARCH_INPUT).send_keys("Biden")
+    def search_field(self, word):
+        self.find(Selector.SEARCH_INPUT).send_keys(word)
         self.find(Selector.SEARCH_SUBMIT).click()
 
     def click_filter(self, params, filter):

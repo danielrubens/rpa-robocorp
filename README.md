@@ -14,5 +14,5 @@ python3 -m pip install -r dev-requirements.txt
 
 Then, run in your root directory the following command: 
 ```bash
-python3 run.py
+python3 tasks.py
 ```

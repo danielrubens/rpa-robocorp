@@ -24,7 +24,8 @@ def word_count(text):
 
 def has_money(text):
     pattern = r'(\$[\d,]+(\.\d+)?|\d+(\.\d+)?\s*(dollars|USD))'
-    return re.search(pattern, text) is not None
+    money_representation = re.search(pattern, text)
+    return 'True' if money_representation is not None else 'False'
 
 def generate_fields(i):
     title = i.find_element(by='xpath', value=Selector.TITLE).text

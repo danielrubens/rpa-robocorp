@@ -4,11 +4,6 @@ tasks:
 
 condaConfigFile: conda.yaml
 artifactsDir: output
-inputs:
-  - URL
-  - SEARCH
-  - SECTION
-  - TYPE
 PATH:
   - .
 PYTHONPATH:

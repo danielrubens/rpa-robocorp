@@ -2,8 +2,7 @@ import time
 from bot.steps import Bot
 from bot.writer import Writer
 from functools import wraps
-# from initial_values import Constants
-from RPA.Robocorp.WorkItems import WorkItems
+from initial_values import Constants
 
 def handle_exceptions_and_delay(func):
     @wraps(func)
@@ -18,25 +17,17 @@ def handle_exceptions_and_delay(func):
 
 @handle_exceptions_and_delay
 def main():
-    wi = WorkItems()
-    wi.get_input_work_item()
-
-    URL = wi.get_work_item_variable("URL")
-    SEARCH = wi.get_work_item_variable("SEARCH")
-    SECTION = [wi.get_work_item_variable("SECTION")]
-    TYPE = [wi.get_work_item_variable("TYPE")]
-
-    bot = Bot(URL)
+    bot = Bot(Constants.URL)
     bot.land_page()
     bot.maximize_window()
     bot.click_cookies()
     bot.click_search()
     time.sleep(2)
-    bot.search_field(SEARCH)
+    bot.search_field(Constants.SEARCH)
     time.sleep(2)
-    bot.click_filter_section(SECTION)
+    bot.click_filter_section(Constants.SECTION)
     time.sleep(2)
-    bot.click_filter_type(TYPE)
+    bot.click_filter_type(Constants.TYPE)
     bot.select_date(2)
     news = bot.get_results()
     writer = Writer(news)

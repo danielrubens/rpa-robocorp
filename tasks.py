@@ -28,7 +28,7 @@ def main():
     bot.click_filter_section(Constants.SECTION)
     time.sleep(2)
     bot.click_filter_type(Constants.TYPE)
-    bot.select_date(2)
+    bot.select_date(Constants.MONTHS)
     news = bot.get_results()
     writer = Writer(news)
     writer.load_xml()

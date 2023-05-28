@@ -3,3 +3,4 @@ class Constants:
     SEARCH = 'Biden'
     SECTION = ['Blogs', 'Business']
     TYPE = ['Article']
+    MONTHS = 2

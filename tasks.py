@@ -3,7 +3,8 @@ from bot.steps import Bot
 from bot.writer import Writer
 from functools import wraps
 from initial_values import Constants
-from robot.api import run
+
+
 
 def handle_exceptions_and_delay(func):
     @wraps(func)
@@ -15,26 +16,21 @@ def handle_exceptions_and_delay(func):
             print(f"An error occurred in function '{func.__name__}': {str(e)}")
     return wrapper
 
+
 @handle_exceptions_and_delay
 def main():
-    variables = run('config.robot', output=None, variable=['SEARCH', 'SECTION', 'TYPE', 'MONTHS'])
-    SEARCH = variables['SEARCH']
-    SECTION = variables['SECTION'].split(',')
-    TYPE = [variables['TYPE']]
-    MONTHS = int(variables['MONTHS'])
-
     bot = Bot(Constants.URL)
     bot.land_page()
     bot.maximize_window()
     bot.click_cookies()
     bot.click_search()
     time.sleep(2)
-    bot.search_field(SEARCH)
+    bot.search_field(Constants.SEARCH)
     time.sleep(2)
-    bot.click_filter_section(SECTION)
+    bot.click_filter_section(Constants.SECTION)
     time.sleep(2)
-    bot.click_filter_type(TYPE)
-    bot.select_date(MONTHS)
+    bot.click_filter_type(Constants.TYPE)
+    bot.select_date(Constants.MONTHS)
     news = bot.get_results()
     writer = Writer(news)
     writer.load_xml()

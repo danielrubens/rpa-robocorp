@@ -4,6 +4,8 @@ from bot.writer import Writer
 from functools import wraps
 from initial_values import Constants
 
+
+
 def handle_exceptions_and_delay(func):
     @wraps(func)
     def wrapper(*args, **kwargs):

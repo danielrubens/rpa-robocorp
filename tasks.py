@@ -18,11 +18,10 @@ def handle_exceptions_and_delay(func):
 @handle_exceptions_and_delay
 def main():
     variables = run('config.robot', output=None, variable=['SEARCH', 'SECTION', 'TYPE', 'MONTHS'])
-
     SEARCH = variables['SEARCH']
-    SECTION = variables['SECTION']
-    TYPE = variables['TYPE']
-    MONTHS = variables['MONTHS']
+    SECTION = variables['SECTION'].split(',')
+    TYPE = [variables['TYPE']]
+    MONTHS = int(variables['MONTHS'])
 
     bot = Bot(Constants.URL)
     bot.land_page()

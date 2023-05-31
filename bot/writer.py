@@ -1,6 +1,8 @@
 import os
 import requests
-import xlsxwriter
+import pandas as pd
+
+
 
 class Writer:
     def __init__(self, news):
@@ -20,24 +22,7 @@ class Writer:
 
     def load_xml(self):
         os.makedirs('output', exist_ok=True)
-        workbook = xlsxwriter.Workbook('output/new_york_times_scraper.xlsx')
-        spreadsheet = workbook.add_worksheet()
+        output_directory = 'output/new_york_times_scraper.xlsx' 
         columns = ["title", "date", "description", "image_url", "image_name", "qty_words", "has_money"]
-
-        for index, row in enumerate(columns):
-            spreadsheet.write(0, index, row)
-        
-        for index, row in enumerate(self.news):
-            values = [
-                row["title"],
-                row["date"],
-                row["description"],
-                row["image_url"],
-                row["image_name"],
-                row["qty_words"],
-                row["has_money"]
-            ]
-            for col_index, value in enumerate(values):
-                spreadsheet.write(index + 1, col_index, value)
-
-        workbook.close()
+        spreadsheet = pd.DataFrame(self.news, columns=columns)
+        spreadsheet.to_excel(output_directory)

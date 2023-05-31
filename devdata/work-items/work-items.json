@@ -1,0 +1,10 @@
+[
+    {
+     "payload":{
+        "SEARCH": "Biden",
+        "SECTION": ["Blogs","Business"],
+        "MONTHS": 2
+     }  ,
+     "files": {} 
+    }
+]

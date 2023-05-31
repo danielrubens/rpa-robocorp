@@ -8,3 +8,4 @@ dependencies:
   - pip=22.1.2
   - pip:
     - rpaframework==22.2.1
+    - pandas==2.0.2
